@@ -23,26 +23,30 @@
 
         public function store(Request $request) {
 
-            $validated = $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'cpf_cnpj' => ['required', 'string', 'max:14', 'unique:clients,cpf_cnpj'],
+            $validated = $request->validate(
+                
+                [
 
-                'email' => ['nullable', 'email', 'max:255'],
-                'phone' => ['nullable', 'string', 'max:20'],
-                'mobile_phone' => ['nullable', 'string', 'max:20'],
+                    'name' => ['required', 'string', 'max:255'],
+                    'cpf_cnpj' => ['required', 'string', 'max:14', 'unique:clients,cpf_cnpj'],
 
-                'zip_code' => ['nullable', 'string', 'max:8'],
-                'address' => ['nullable', 'string', 'max:255'],
-                'address_number' => ['nullable', 'string', 'max:20'],
-                'complement' => ['nullable', 'string', 'max:255'],
-                'neighborhood' => ['nullable', 'string', 'max:255'],
-                'city' => ['nullable', 'string', 'max:255'],
-                'state' => ['nullable', 'string', 'size:2'],
-                'country' => ['nullable', 'string', 'size:2'],
+                    'email' => ['nullable', 'email', 'max:255'],
+                    'phone' => ['nullable', 'string', 'max:20'],
+                    'mobile_phone' => ['nullable', 'string', 'max:20'],
 
-                'active' => ['nullable', 'boolean'],
-                'notes' => ['nullable', 'string'],
-            ]);
+                    'zip_code' => ['nullable', 'string', 'max:8'],
+                    'address' => ['nullable', 'string', 'max:255'],
+                    'address_number' => ['nullable', 'string', 'max:20'],
+                    'complement' => ['nullable', 'string', 'max:255'],
+                    'neighborhood' => ['nullable', 'string', 'max:255'],
+                    'city' => ['nullable', 'string', 'max:255'],
+                    'state' => ['nullable', 'string', 'size:2'],
+                    'country' => ['nullable', 'string', 'size:2'],
+
+                    'active' => ['nullable', 'boolean'],
+                    'notes' => ['nullable', 'string']
+
+                ]);
 
             Client::create($validated);
 

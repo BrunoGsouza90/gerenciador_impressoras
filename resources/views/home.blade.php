@@ -17,6 +17,8 @@
 <body>
 
     <h1>Home</h1>
+
+    <a href="{{ route('clients.index') }}">Visualizar Clientes</a>
     
 </body>
 
