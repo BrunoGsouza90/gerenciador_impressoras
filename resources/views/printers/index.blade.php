@@ -8,7 +8,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Clientes</title>
+        <title>Impressoras</title>
 
         <style>
 
@@ -142,7 +142,17 @@
 
             }
 
-            .status {
+            .supplies {
+
+                display: flex;
+
+                flex-wrap: wrap;
+
+                gap: 6px;
+
+            }
+
+            .supply {
 
                 display: inline-block;
 
@@ -154,21 +164,15 @@
 
                 font-weight: bold;
 
-            }
+                background-color: #dbeafe;
 
-            .status-active {
-
-                background-color: #dcfce7;
-
-                color: #166534;
+                color: #1e40af;
 
             }
 
-            .status-inactive {
+            .no-supplies {
 
-                background-color: #fee2e2;
-
-                color: #991b1b;
+                color: #777;
 
             }
 
@@ -266,13 +270,13 @@
 
                 table {
 
-                    min-width: 900px;
+                    min-width: 1000px;
 
                 }
 
             }
 
-            .cabecalho {
+                        .cabecalho {
 
                 display: flex;
 
@@ -332,9 +336,9 @@
 
                 </div>
 
-                <h1>Clientes</h1>
+                <h1>Impressoras</h1>
 
-                <a href="{{ route('clients.create') }}" class="btn btn-primary">Novo Cliente</a>
+                <a href="{{ route('printers.create') }}" class="btn btn-primary">Nova Impressora</a>
 
             </div>
 
@@ -360,9 +364,9 @@
 
             <div class="card">
 
-                <h2>Lista de Clientes</h2>
+                <h2>Lista de Impressoras</h2>
 
-                @if($clients->count() > 0)
+                @if($printers->count() > 0)
 
                     <table>
 
@@ -372,15 +376,15 @@
 
                                 <th>ID</th>
 
-                                <th>Nome</th>
+                                <th>Marca</th>
 
-                                <th>CPF/CNPJ</th>
+                                <th>Modelo</th>
 
-                                <th>E-mail</th>
+                                <th>Número de Série</th>
 
-                                <th>Telefone</th>
+                                <th>Cliente</th>
 
-                                <th>Status</th>
+                                <th>Suprimentos</th>
 
                                 <th>Ações</th>
 
@@ -390,49 +394,64 @@
 
                         <tbody>
 
-                            @foreach($clients as $client)
+                            @foreach($printers as $printer)
 
                                 <tr>
 
                                     <td>
 
-                                        {{ $client->id }}
+                                        {{ $printer->id }}
 
                                     </td>
 
                                     <td>
 
-                                        {{ $client->name }}
+                                        {{ $printer->brand }}
 
                                     </td>
 
                                     <td>
 
-                                        {{ $client->cpf_cnpj }}
+                                        {{ $printer->model }}
 
                                     </td>
 
                                     <td>
 
-                                        {{ $client->email ?? "-" }}
+                                        {{ $printer->serial_number }}
 
                                     </td>
 
                                     <td>
 
-                                        {{ $client->phone ?? "-" }}
+                                        {{ $printer->client->name ?? "-" }}
 
                                     </td>
 
                                     <td>
 
-                                        @if($client->active)
+                                        @if($printer->supplies->count() > 0)
 
-                                            <span class="status status-active">Ativo</span>
+                                            <div class="supplies">
+
+                                                @foreach($printer->supplies as $supply)
+
+                                                    <span class="supply">
+
+                                                        {{ $supply->name }}
+
+                                                    </span>
+
+                                                @endforeach
+
+                                            </div>
 
                                         @else
 
-                                            <span class="status status-inactive">Inativo
+                                            <span class="no-supplies">
+
+                                                Nenhum suprimento
+
                                             </span>
 
                                         @endif
@@ -443,9 +462,9 @@
 
                                         <div class="actions">
 
-                                            <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-edit">Editar</a>
+                                            <a href="{{ route('printers.edit', $printer->id) }}" class="btn btn-edit">Editar</a>
 
-                                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir este cliente?');">
+                                            <form action="{{ route('printers.destroy', $printer->id) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir esta impressora?');">
 
                                                 @csrf
 
@@ -471,7 +490,7 @@
 
                     <div class="empty">
 
-                        <p>Nenhum cliente cadastrado.</p>
+                        <p>Nenhuma impressora cadastrada.</p>
 
                     </div>
 
