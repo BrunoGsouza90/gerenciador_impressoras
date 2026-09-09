@@ -1,33 +1,51 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    public function up(): void
-    {
-        Schema::create('supplies', function (Blueprint $table) {
-            $table->id();
+    return new class extends Migration {
 
-            $table->string('name');
+        public function up(): void {
 
-            $table->enum('type', [
-                'toner',
-                'photoconductor',
-                'fuser',
-                'ink',
-                'print_head',
-                'ink_reservoir',
-            ]);
+            Schema::create("supplies", function (Blueprint $table) {
 
-            $table->timestamps();
-        });
-    }
+                $table->id();
 
-    public function down(): void
-    {
-        Schema::dropIfExists('supplies');
-    }
-};
+                $table->string("name");
+
+                $table->enum (
+                    
+                    "type", 
+                    
+                    [
+
+                        "toner",
+
+                        "photoconductor",
+
+                        "fuser",
+
+                        "ink",
+
+                        "print_head",
+
+                        "ink_reservoir"
+
+                    ]
+                    
+                );
+
+                $table->timestamps();
+            });
+        }
+
+        public function down(): void {
+
+            Schema::dropIfExists("supplies");
+
+        }
+        
+    };
+
+?>

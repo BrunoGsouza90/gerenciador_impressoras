@@ -510,6 +510,15 @@
                             </button>
 
                             <a
+                                href="{{ route('printers.history', $printer) }}"
+                                class="btn btn-primary"
+                            >
+
+                                Histórico de Clientes
+
+                            </a>
+
+                            <a
                                 href="{{ route('printers.maintenances.index', $printer) }}"
                                 class="btn btn-maintenance"
                             >

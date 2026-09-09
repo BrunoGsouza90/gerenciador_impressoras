@@ -1,41 +1,37 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('printer_maintenances', function (Blueprint $table) {
-            $table->id();
+    return new class extends Migration {
 
-            $table->foreignId('printer_id')
-                ->constrained('printers')
-                ->cascadeOnDelete();
+        public function up(): void {
 
-            $table->foreignId('supply_id')
-                ->nullable()
-                ->constrained('supplies')
-                ->nullOnDelete();
+            Schema::create("printer_maintenances", function (Blueprint $table) {
 
-            $table->unsignedBigInteger('pages_count');
+                $table->id();
 
-            $table->text('description')->nullable();
+                $table->foreignId("printer_id")->constrained("printers")->cascadeOnDelete();
 
-            $table->timestamps();
-        });
-    }
+                $table->foreignId("supply_id")->nullable()->constrained("supplies")->nullOnDelete();
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('printer_maintenances');
-    }
-};
+                $table->unsignedBigInteger("pages_count");
+
+                $table->text("description")->nullable();
+
+                $table->timestamps();
+
+            });
+
+        }
+
+        public function down(): void {
+
+            Schema::dropIfExists("printer_maintenances");
+
+        }
+
+    };
+
+?>

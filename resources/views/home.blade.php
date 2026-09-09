@@ -326,6 +326,45 @@
 
                 </div>
 
+                <!-- Suprimentos -->
+
+                <div class="card">
+
+                    <div class="card-icon">
+
+                        🖨️
+
+                    </div>
+
+                    <h2>Suprimentos</h2>
+
+                    <p>
+
+                        Gerencie as impressoras cadastradas, seus clientes
+                        e os suprimentos utilizados por cada equipamento.
+
+                    </p>
+
+                    <div class="actions">
+
+                        <a
+                            href="{{ route('supplies.index') }}"
+                            class="btn btn-primary"
+                        >
+                            Visualizar Suprimentos
+                        </a>
+{{-- 
+                        <a
+                            href="{{ route('printers.create') }}"
+                            class="btn btn-secondary"
+                        >
+                            Novo Suprimento
+                        </a> --}}
+
+                    </div>
+
+                </div>
+
             </div>
 
 

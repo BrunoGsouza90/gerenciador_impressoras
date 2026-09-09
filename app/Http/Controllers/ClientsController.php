@@ -12,7 +12,9 @@
 
             $clients = Client::all();
 
-            return view("clients.index", compact("clients"));
+            $latestClient = Client::latest()->first();
+
+            return view("clients.index", compact("clients", "latestClient"));
 
         }
 
@@ -22,7 +24,7 @@
 
         }
 
-        public function store(Request $request) {
+        public function store (Request $request) {
 
             $validated = $request->validate (
                 
@@ -72,7 +74,7 @@
 
         }
 
-        public function update(Request $request, Client $client) {
+        public function update (Request $request, Client $client) {
 
             $validated = $request->validate( 
                 
@@ -121,11 +123,17 @@
 
         }
 
-        public function destroy(Client $client) {
+        public function destroy (Client $client) {
 
             $client->delete();
 
             return redirect()->route("clients.index")->with("success", "Cliente excluído com sucesso!");
+
+        }
+
+        public function history (Request $request) {
+
+            dd("oi");
 
         }
 
